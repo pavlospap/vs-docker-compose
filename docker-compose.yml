@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  eshop-api:
+    image: ${DOCKER_REGISTRY-}eshop-api
+    build:
+      context: .
+      dockerfile: EshopApi/Dockerfile
+    container_name: eshop-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:80"
+    networks:
+      - eshop-network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=EshopDb
+      - TZ=Europe/Athens
+      - PGTZ=Europe/Athens
+    ports:
+      - "5432:5432"
+    networks:
+      - eshop-network
+
+networks:
+  eshop-network:
+    name: eshop-network
+    driver: bridge

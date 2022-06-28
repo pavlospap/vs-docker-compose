@@ -1,0 +1,5 @@
+Visual Studio with docker-compose
+
+Just set the docker-compose project as Startup Project
+
+Test with Swagger at http://localhost:5000/swagger/index.html
